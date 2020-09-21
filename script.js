@@ -64,40 +64,41 @@ let counter = 0;
 
 // TODO: Implement this function!
 function handleCardClick(event) {
-  event.target.classList.toggle("hide"); //white
-  event.target.classList.add("clicked");
+  event.target.classList.toggle("hide"); // hides color. Turns card to white
+  event.target.classList.add("clicked"); // adds class of 'clicked' to cards
   openCards.push(event.target); // push cards to array
   if (openCards.length === 2) {
     // if array = 2 cards
     if (
-      // if array cards equal each other
+      // if both cards in array are the same color
       openCards[0].getAttribute("data-color") ===
       openCards[1].getAttribute("data-color")
     ) {
-      counter++;
+      counter++; // add click to counter if both cards are the same color
       setTimeout(function () {
         if (counter === 5) {
-          alert("You won the game!");
+          // counter = 5 clicks (all same cards are clicked)
+          alert("You won the game!"); // module alert saying you won
         }
-      }, 500);
-      //disable click on each card
-      openCards[0].style.pointerEvents = "none";
-      openCards[1].style.pointerEvents = "none";
+      }, 500); // do the above after .5 seconds so all code executes
+
+      openCards[0].style.pointerEvents = "none"; //disable click on each open card
+      openCards[1].style.pointerEvents = "none"; // since they match
     } else {
       //disable click
-      let firstUnmatched = openCards[0];
-      let secondUnmatched = openCards[1];
-      firstUnmatched.classList.remove("clicked");
-      secondUnmatched.classList.remove("clicked");
-      gameContainer.style.pointerEvents = "none";
+      let firstUnmatched = openCards[0]; // 1st card in array if they dont match
+      let secondUnmatched = openCards[1]; // 2nd card in array if they dont match
+      firstUnmatched.classList.remove("clicked"); // remove class on 1st card
+      secondUnmatched.classList.remove("clicked"); // remove class on 2nd card
+      gameContainer.style.pointerEvents = "none"; // disable click
       setTimeout(function () {
         // unmatched = white
-        firstUnmatched.classList.toggle("hide");
-        secondUnmatched.classList.toggle("hide");
-        gameContainer.style.pointerEvents = "auto"; //enable click
-      }, 1000);
+        firstUnmatched.classList.toggle("hide"); // hide toggle between color/white
+        secondUnmatched.classList.toggle("hide"); // hide toggle between color/white
+        gameContainer.style.pointerEvents = "auto"; //enable click...
+      }, 1000); // ...after 1 second so player can click again
     }
-    openCards = [];
+    openCards = []; // reset array to take in new cards
   }
 }
 
